@@ -1,11 +1,12 @@
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
-import { selectIsLoading, selectError } from "./redux/contactsSlice";
+import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
+import { selectIsLoading, selectError } from "./redux/contacts/slice";
 import Loader from "./components/Loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
-import { fetchContacts } from "./redux/contactsOps";
+import { fetchContacts } from "./redux/contacts/operations";
 
 function App() {
 
@@ -23,7 +24,8 @@ function App() {
   return (
     <>
       
-          <h1>Phonebook</h1>
+      <h1>Phonebook</h1>
+          <RegistrationPage />
           <ContactForm  />
           <SearchBox />
           {isLoading && <Loader />}

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import css from "./ContactForm.module.css"
 import { useDispatch } from "react-redux";
 import { useId } from 'react';
-import { addContact } from "../../redux/contactsOps";
+import { addContact } from "../../redux/contacts/operations";
 
 
 
