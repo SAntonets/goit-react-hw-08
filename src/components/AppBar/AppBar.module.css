@@ -1,0 +1,10 @@
+.AppBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: row;
+    width: 90vw;
+    top: 0;
+  }

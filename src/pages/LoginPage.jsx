@@ -3,17 +3,11 @@ import * as Yup from "yup";
 import {
   MAX_CHAR_NAME_VALIDATION,
   MIN_CHAR_PASSWORD_VALIDATION,
-} from "../../utils/constans";
+} from "../utils/constans";
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/auth/operations";
+import { logIn } from "../redux/auth/operations";
 
-const registerUserSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("Name is required!")
-    .max(
-      MAX_CHAR_NAME_VALIDATION,
-      `Your user name must be less than ${MAX_CHAR_NAME_VALIDATION} characters!`
-    ),
+const loginUserSchema = Yup.object().shape({
   email: Yup.string()
     .required("Email address is required!")
     .email("You must enter valid email address!"),
@@ -26,16 +20,16 @@ const registerUserSchema = Yup.object().shape({
 });
 
 const FORM_INITIAL_VALUES = {
-  name: "",
   email: "",
   password: "",
 };
 
-const RegistrationPage = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(register(values));
+    console.log(values);
+    dispatch(logIn(values));
     actions.resetForm();
   };
 
@@ -43,11 +37,11 @@ const RegistrationPage = () => {
     <div>
       <Formik
         initialValues={FORM_INITIAL_VALUES}
-        validationSchema={registerUserSchema}
+        validationSchema={loginUserSchema}
         onSubmit={handleSubmit}
       >
         <Form>
-          <h2>Register user</h2>
+          <h2>Login</h2>
           <label>
             <span>Email:</span>
             <br />
@@ -56,28 +50,22 @@ const RegistrationPage = () => {
           </label>{" "}
           <br />
           <label>
-            <span>Name:</span>
-            <br />
-            <Field type="text" name="name" placeholder="Enter your name" />
-            <ErrorMessage component="p" name="name" />
-          </label>
-          <br />
-          <label>
             <span>Password:</span>
             <br />
             <Field
               type="password"
               name="password"
               placeholder="Enter your password"
+              autoComplete="current-password"
             />
             <ErrorMessage component="p" name="password" />
           </label>
           <br />
-          <button type="submit">▶ Create new user</button>
+          <button type="submit">Login</button>
         </Form>
       </Formik>
     </div>
   );
 };
 
-export default RegistrationPage;
+export default LoginPage;
