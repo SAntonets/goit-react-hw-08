@@ -6,6 +6,7 @@ import { fetchContacts } from "./redux/contacts/operations";
 import { Routes, Route } from "react-router";
 import Layout from "./components/Layout/Layout";
 import './App.css'
+import { refreshUser } from "./redux/auth/operations";
 
 
 
@@ -20,11 +21,12 @@ function App() {
 
  
 
-      //const dispatch = useDispatch();
+    const dispatch = useDispatch();
  
-    //useEffect(() => {
-    //    dispatch(fetchContacts());
-    //}, [dispatch]);
+    useEffect(() => {
+      dispatch(refreshUser());
+    }, [dispatch]);
+    
 
   
   return (
