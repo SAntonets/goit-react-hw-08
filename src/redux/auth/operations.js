@@ -12,7 +12,7 @@ export const clearToken = () => (instance.defaults.headers.common.Authorization 
 
 export const register = createAsyncThunk("auth/register", async (formData, thunkAPI) => {
     try {
-        const { data } = await axios.post("/users/signup", formData);
+        const { data } = await instance.post("/users/signup", formData);
         setToken(data.token);
         return data;
     } catch (e) {
@@ -22,7 +22,7 @@ export const register = createAsyncThunk("auth/register", async (formData, thunk
 
 export const logIn = createAsyncThunk("auth/login", async (formData, thunkAPI) => {
     try {
-        const { data } = await axios.post("/users/login", formData);
+        const { data } = await instance.post("/users/login", formData);
         setToken(data.token);
         return data;
     } catch (e) {
