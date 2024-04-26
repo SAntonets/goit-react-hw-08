@@ -2,13 +2,13 @@
 import Loader from "./components/Loader/Loader";
 import { useDispatch } from "react-redux";
 import { Suspense, lazy, useEffect } from 'react';
-import { fetchContacts } from "./redux/contacts/operations";
 import { Routes, Route } from "react-router";
 import Layout from "./components/Layout/Layout";
 import './App.css'
 import { refreshUser } from "./redux/auth/operations";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { selectIsLoggedIn } from "./redux/auth/slice";
 
 
 
@@ -22,8 +22,8 @@ function App() {
   
 
  
-
-    const dispatch = useDispatch();
+  
+  const dispatch = useDispatch();
     useEffect(() => {
       dispatch(refreshUser());
     }, [dispatch]);

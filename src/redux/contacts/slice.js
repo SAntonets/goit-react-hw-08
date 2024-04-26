@@ -34,8 +34,8 @@ const contactsSlice = createSlice({
       })
     .addMatcher(
       isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending), (state) => {
-        state.contacts.loading = true;
-      state.contacts.error = null;
+     state.contacts.loading = true;
+     state.contacts.error = null;
     })
     .addMatcher(
       isAnyOf(fetchContacts.rejected, addContact.rejected, deleteContact.rejected), (state, action) => {
@@ -53,8 +53,7 @@ export const selectIsLoading = (state) => state.contacts.contacts.loading;
 export const selectError = (state) => state.contacts.contacts.error;
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter], 
-  (contacts, nameFilter) => { 
-      return contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()));
+  (contacts, nameFilter) => {return contacts !== null &&  contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()));
   }
 )
 export const contactsReducer = contactsSlice.reducer;

@@ -10,7 +10,7 @@ import { addContact } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
   const validationSchema = Yup.object().shape({
-    username: Yup.string()
+    name: Yup.string()
       .required("Username is required")
       .min(3, "Username must be at least 3 characters")
       .max(50, "Username must not exceed 50 characters"),
@@ -27,15 +27,16 @@ const ContactForm = () => {
 
  
   const initialValues = {
-      username: "",
+      name: "",
       number: "",
   };
 
   
   
   const handleSubmit = (values, actions) => {
+    console.log(values);
+    dispatch(addContact({ "name": values.name, "number": values.number }));
     actions.resetForm();
-    dispatch(addContact({"name": values.username, "number": values.number }));
   };  
 
 
@@ -46,8 +47,8 @@ return (
       {({ errors, touched }) => (
         <Form className={css.form}>
           <label className={css.formLabel} htmlFor={nameFieldId}>Username</label>
-          <Field className={css.formInput} type="text" name="username" id={nameFieldId} />
-          {errors.username && touched.username && <div>{errors.username}</div>}
+          <Field className={css.formInput} type="text" name="name" id={nameFieldId} />
+          {errors.name && touched.name && <div>{errors.name}</div>}
 
           <label className={css.formLabel} htmlFor={numberFieldId}>Number</label>
           <Field className={css.formInput} type="tel" name="number" id={numberFieldId} />
