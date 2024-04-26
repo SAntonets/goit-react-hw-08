@@ -7,7 +7,7 @@ import { selectNameFilter } from "../filters/slice";
 
 const initialState = {
   contacts: {
-    items: [],
+    items: null,
     loading: false,
     error: null
   },
@@ -53,7 +53,7 @@ export const selectIsLoading = (state) => state.contacts.contacts.loading;
 export const selectError = (state) => state.contacts.contacts.error;
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter], 
-  (contacts, nameFilter) => {return contacts !== null &&  contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()));
+  (contacts, nameFilter) => {return Array.isArray(contacts) && contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()));
   }
 )
 export const contactsReducer = contactsSlice.reducer;

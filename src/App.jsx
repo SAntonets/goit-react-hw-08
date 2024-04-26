@@ -8,7 +8,7 @@ import './App.css'
 import { refreshUser } from "./redux/auth/operations";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import { selectIsLoggedIn } from "./redux/auth/slice";
+
 
 
 
