@@ -20,7 +20,7 @@ export const register = createAsyncThunk("auth/register", async (formData, thunk
     }
 })
 
-export const logIn = createAsyncThunk("auth/login", async (formData, thunkAPI) => {
+export const login = createAsyncThunk("auth/login", async (formData, thunkAPI) => {
     try {
         const { data } = await instance.post("/users/login", formData);
         setToken(data.token);
@@ -42,3 +42,12 @@ export const refreshUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) 
     }
 })
 
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+    try {
+        await instance.post("/users/logout",);
+        clearToken();
+        return;
+    } catch (e) {
+        return thunkAPI.rejectWithValue(e.message);
+    }
+})

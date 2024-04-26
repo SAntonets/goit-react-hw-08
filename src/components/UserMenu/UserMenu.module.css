@@ -13,3 +13,12 @@ nav {
 nav a:hover {
   color: green;
 }
+
+.UserMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}

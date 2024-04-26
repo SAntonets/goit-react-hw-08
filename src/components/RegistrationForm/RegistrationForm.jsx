@@ -76,7 +76,7 @@ function RegistrationForm() {
         <ErrorMessage component="p" name="password" />
       </label>
       <br />
-      <button type="submit">▶ Create new user</button>
+      <button type="submit">Create new user 🐣</button>
     </Form>
   </Formik>
   </>

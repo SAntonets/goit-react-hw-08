@@ -4,7 +4,7 @@ import {
   MIN_CHAR_PASSWORD_VALIDATION,
 } from "../../utils/constans";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import { login } from "../../redux/auth/operations";
 
 const loginUserSchema = Yup.object().shape({
   email: Yup.string()
@@ -27,7 +27,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(logIn(values));
+    dispatch(login(values));
     actions.resetForm();
   };
 
@@ -59,7 +59,7 @@ const LoginForm = () => {
             <ErrorMessage component="p" name="password" />
           </label>
           <br />
-          <button type="submit">Login</button>
+          <button type="submit">Login 🐥</button>
         </Form>
       </Formik>
     </div>
