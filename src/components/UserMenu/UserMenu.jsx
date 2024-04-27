@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import css from './UserMenu.module.css'
 import { useDispatch, useSelector } from "react-redux";
@@ -15,14 +14,8 @@ function UserMenu() {
     dispatch(logout())
   }
     
-    const getNavLinkClassName = ({ isActive }) =>
-    clsx(css.navLink, {
-      [css.active]: isActive,
-    });
-
   return (
     <div className={css.UserMenu}>
-      <NavLink className={getNavLinkClassName} to="/contacts">Contacts</NavLink>
       <div>
         <span>Hello, {userData.name}</span>
       </div>
