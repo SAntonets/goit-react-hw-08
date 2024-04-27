@@ -33,7 +33,10 @@ const contactsSlice = createSlice({
     state.contacts.loading = false;
     state.contacts.items = state.contacts.items.filter((contact) => contact.id !== action.payload.id);
     })
-    .addCase(logout.fulfilled, () => initialState)
+    .addCase(logout.fulfilled, () => {
+      return initialState
+    }
+    )
     .addMatcher(
       isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending), (state) => {
      state.contacts.loading = true;
