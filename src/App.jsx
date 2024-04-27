@@ -1,6 +1,6 @@
 
 import Loader from "./components/Loader/Loader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route } from "react-router";
 import Layout from "./components/Layout/Layout";
@@ -8,6 +8,7 @@ import './App.css'
 import { refreshUser } from "./redux/auth/operations";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { selectIsRefreshing } from "./redux/auth/slice";
 
 
 
@@ -27,9 +28,14 @@ function App() {
     useEffect(() => {
       dispatch(refreshUser());
     }, [dispatch]);
-    
-
   
+  
+  const isRefreshing = useSelector(selectIsRefreshing);  
+  
+  if (isRefreshing) {
+    return <Loader />
+  }
+
   return (
     <Layout>
       <Suspense fallback={<Loader />}>

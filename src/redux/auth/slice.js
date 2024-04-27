@@ -16,6 +16,7 @@ const initialState = {
  isLoggedIn: false,
  isError: false,
  isLoading: false,
+ isRefreshing: false,
 }
 ;  
 
@@ -39,26 +40,31 @@ const authSlice = createSlice({
           state.user = action.payload.user;
           state.token = action.payload.token;
         })
+        .addCase(refreshUser.pending, (state) => {
+        state.isRefreshing = true;
+        })
         .addCase(refreshUser.fulfilled, (state, action) => {
           state.isLoading = false;
           state.isLoggedIn = true;
           state.user = action.payload;
+          state.isRefreshing = false;
+        })
+        .addCase(refreshUser.rejected, (state) => {
+        state.isRefreshing = false;
         })
         .addCase(logout.fulfilled, () => {
           return initialState
         })
         .addMatcher(
-          isAnyOf(register.pending, login.pending, refreshUser.pending, logout.pending), (state) => {
+          isAnyOf(register.pending, login.pending, logout.pending), (state) => {
             state.isLoading = true;
           state.isError = false;
         })
         .addMatcher(
-          isAnyOf(register.rejected, login.rejected, refreshUser.rejected, logout.rejected), (state) => {
+          isAnyOf(register.rejected, login.rejected, logout.rejected), (state) => {
             state.isLoading = false;
             state.isError = true;
-          }
-        )
-    
+        })
     
 } }, 
 );
@@ -70,5 +76,6 @@ export const selectUser = (state) => state.auth.user;
 export const selectToken = (state) => state.auth.token;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectIsError = (state) => state.auth.isError;
+export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 
 
