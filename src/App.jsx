@@ -41,9 +41,9 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RestrictedRoute><RegistrationPage /></RestrictedRoute> } />
-          <Route path="/login" element={<RestrictedRoute><LoginPage /></RestrictedRoute>} />
-          <Route path="/contacts" element={<PrivateRoute><ContactsPage /></PrivateRoute> } />
+          <Route path="/register" element={<RestrictedRoute component={<RegistrationPage />} redirectTo="/contacts" /> } />
+          <Route path="/login" element={<RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />} />
+          <Route path="/contacts" element={<PrivateRoute component={<ContactsPage />} redirectTo="/login" /> } />
           <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
