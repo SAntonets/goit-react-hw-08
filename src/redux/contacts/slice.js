@@ -22,25 +22,26 @@ const contactsSlice = createSlice({
   extraReducers:  (builder) => {
   builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
-    state.contacts.loading = false;
-    state.contacts.items = action.payload;
+        state.contacts.loading = false;
+        state.contacts.items = action.payload;
       })
       .addCase(addContact.fulfilled, (state, action) => {
-    state.contacts.loading = false;
-    state.contacts.items.push(action.payload);
+        state.contacts.loading = false;
+        state.contacts.items.push(action.payload);
       })
     .addCase(deleteContact.fulfilled, (state, action) => {
-    state.contacts.loading = false;
-    state.contacts.items = state.contacts.items.filter((contact) => contact.id !== action.payload.id);
+        state.contacts.loading = false;
+        state.contacts.items = state.contacts.items.filter((contact) => contact.id !== action.payload.id);
     })
-    .addCase(logout.fulfilled, () => {
-      return initialState
-    }
-    )
+    .addCase(logout.fulfilled, (state) => {
+       state.contacts.items = null;
+       state.contacts.error = null;
+       state.contacts.loading = false;
+    })                
     .addMatcher(
       isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending), (state) => {
-     state.contacts.loading = true;
-     state.contacts.error = null;
+       state.contacts.loading = true;
+       state.contacts.error = null;
     })
     .addMatcher(
       isAnyOf(fetchContacts.rejected, addContact.rejected, deleteContact.rejected), (state, action) => {
